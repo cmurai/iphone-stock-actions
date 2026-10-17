@@ -1,0 +1,3 @@
+.stock-state/
+__pycache__/
+.env
