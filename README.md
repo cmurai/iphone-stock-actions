@@ -1,6 +1,6 @@
 # iPhone pickup checker for GitHub Actions
 
-Runs one check every 15 minutes, with optional Slack incoming-webhook alerts.
+Runs one check every 10 minutes, with optional Slack incoming-webhook alerts.
 Python standard library only. Upload the contents of this directory to the root
 of a GitHub repository, including `.github/workflows/stock.yml`, and commit to
 the repository's default branch. A private repository keeps locations and stock
