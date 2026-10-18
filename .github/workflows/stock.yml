@@ -3,7 +3,7 @@ name: iPhone pickup stock
 on:
   workflow_dispatch:
   schedule:
-    - cron: '1,11,21,31,41,51 * * * *'
+    - cron: '1-59/5 * * * *'
 
 permissions:
   contents: read

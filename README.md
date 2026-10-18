@@ -52,7 +52,7 @@ No Slack message or GitHub deployment was performed while preparing this package
 - GitHub cache preserves observations between runners. Cache eviction/loss, a crash
   after Slack accepts a message, or a failed cache save can produce repeat alerts.
   This is best-effort deduplication, not exactly-once delivery.
-- Schedule is minutes 7, 22, 37, and 52 each hour (UTC); one check per run, no --watch.
+- Schedule is minutes every 5 minutes each hour (UTC); one check per run, no --watch.
   For five-minute checks use `2-59/5 * * * *`. More checks use more Actions minutes.
 - GitHub schedules run on the default branch and may be delayed or dropped under
   load. Public repositories' schedules can be disabled after 60 days of inactivity.
