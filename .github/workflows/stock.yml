@@ -1,44 +1,44 @@
-name: iPhone pickup stock
+# name: iPhone pickup stock
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '1-59/5 * * * *'
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: '1-59/5 * * * *'
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-concurrency:
-  group: iphone-stock
-  cancel-in-progress: false
+# concurrency:
+#   group: iphone-stock
+#   cancel-in-progress: false
 
-jobs:
-  check:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Restore last successful observation
-        uses: actions/cache/restore@v4
-        with:
-          path: .stock-state
-          key: iphone-stock-v1-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            iphone-stock-v1-
-      - name: Check pickup and notify
-        env:
-          APPLE_REQUEST_URL: ${{ secrets.APPLE_REQUEST_URL }}
-          APPLE_ZIP: ${{ vars.APPLE_ZIP }}
-          APPLE_PARTS: ${{ vars.APPLE_PARTS }}
-          APPLE_STORES: ${{ vars.APPLE_STORES }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python run_actions.py
-      - name: Save successful observation
-        uses: actions/cache/save@v4
-        with:
-          path: .stock-state
-          key: iphone-stock-v1-${{ github.run_id }}-${{ github.run_attempt }}
+# jobs:
+#   check:
+#     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 5
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.12'
+#       - name: Restore last successful observation
+#         uses: actions/cache/restore@v4
+#         with:
+#           path: .stock-state
+#           key: iphone-stock-v1-${{ github.run_id }}-${{ github.run_attempt }}
+#           restore-keys: |
+#             iphone-stock-v1-
+#       - name: Check pickup and notify
+#         env:
+#           APPLE_REQUEST_URL: ${{ secrets.APPLE_REQUEST_URL }}
+#           APPLE_ZIP: ${{ vars.APPLE_ZIP }}
+#           APPLE_PARTS: ${{ vars.APPLE_PARTS }}
+#           APPLE_STORES: ${{ vars.APPLE_STORES }}
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#         run: python run_actions.py
+#       - name: Save successful observation
+#         uses: actions/cache/save@v4
+#         with:
+#           path: .stock-state
+#           key: iphone-stock-v1-${{ github.run_id }}-${{ github.run_attempt }}
